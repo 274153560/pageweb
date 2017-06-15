@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F0F0F0;
+        }
+    </style>
+    <script src="js/konva.min.js"></script>
+    <script src="js/web.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var arr=new Array();
+    var width=window.innerWidth;
+    var height=window.innerHeight;
+    var stage=new Konva.Stage({
+        container:'container',
+        width:width,
+        height:height
+    });
+    var layer=new Konva.Layer();
+    var outRadius=195;
+    var innerRadius = 115;
+    var bgGroup=new Konva.Group({
+        x:stage.getWidth()/2,
+        y:stage.getHeight()/2,
+    });
+    var outC=new Konva.Circle({
+        x:0,
+        y:0,
+        radius:outRadius,
+        stroke:"red",
+        dash:[5]
+    });
+    var minC=new Konva.Circle({
+        x:0,
+        y:0,
+        radius:125,
+        stroke:"green",
+        dash:[5]
+    });
+    var inC=new Konva.Circle({
+        x:0,
+        y:0,
+        radius:innerRadius,
+        stroke:"blue",
+        dash:[5]
+    });
+    var ring=new Circle({
+        x:0,
+        y:0,
+        outRadius:80,
+        innRadius:60,
+        outColor: "black",
+        outOpacity: .5,
+        innColor: "#2a3466",
+        innOpacity: 1,
+        text: "WEB全栈",
+    });
+    ring.addToGroupOrLayer(bgGroup);
+    bgGroup.add(outC);
+    bgGroup.add(minC);
+    bgGroup.add(inC);
+
+    var shunGroup = new Konva.Group({
+        x: stage.getWidth() / 2,
+        y: stage.getHeight() / 2
+    });
+    var angle=-90;
+    var webApp=new Circle({
+        x:0+Math.cos(angle*Math.PI/180)*outRadius,
+        y:0+Math.sin(angle*Math.PI/180)*outRadius,
+        outRadius:40,
+        outColor:"#ccc",
+        innRadius:35,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"webApp"
+    });
+    webApp.addToGroupOrLayer(shunGroup);
+    angle+=120;
+    var canvas=new Circle({
+        x:0+Math.cos(angle*Math.PI/180)*outRadius,
+        y:0+Math.sin(angle*Math.PI/180)*outRadius,
+        outRadius:40,
+        outColor:"#ccc",
+        innRadius:35,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"canvas"
+    });
+    canvas.addToGroupOrLayer(shunGroup);
+    angle+=120;
+    var rectJs=new Circle({
+        x:0+Math.cos(angle*Math.PI/180)*outRadius,
+        y:0+Math.sin(angle*Math.PI/180)*outRadius,
+        outRadius:40,
+        outColor:"#ccc",
+        innRadius:35,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"rectJs"
+    });
+    rectJs.addToGroupOrLayer(shunGroup);
+    var niGroup=new Konva.Group({
+        x: stage.getWidth() / 2,
+        y: stage.getHeight() / 2
+    });
+    var innerAngle=-90;
+    var h5=new Circle({
+        x:0+Math.cos(innerAngle*Math.PI/180)*innerRadius,
+        y:0+Math.sin(innerAngle*Math.PI/180)*innerRadius,
+        outRadius:35,
+        outColor:"#ccc",
+        innRadius:30,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"h5"
+    });
+    h5.addToGroupOrLayer(niGroup);
+    innerAngle+=90;
+    var c3=new Circle({
+        x:0+Math.cos(innerAngle*Math.PI/180)*innerRadius,
+        y:0+Math.sin(innerAngle*Math.PI/180)*innerRadius,
+        outRadius:35,
+        outColor:"#ccc",
+        innRadius:30,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"c3"
+    });
+    c3.addToGroupOrLayer(niGroup);
+    innerAngle+=90;
+    var NodeJs=new Circle({
+        x:0+Math.cos(innerAngle*Math.PI/180)*innerRadius,
+        y:0+Math.sin(innerAngle*Math.PI/180)*innerRadius,
+        outRadius:35,
+        outColor:"#ccc",
+        innRadius:30,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"NodeJs"
+    });
+    NodeJs.addToGroupOrLayer(niGroup);
+    innerAngle+=90;
+    var JQ=new Circle({
+        x:0+Math.cos(innerAngle*Math.PI/180)*innerRadius,
+        y:0+Math.sin(innerAngle*Math.PI/180)*innerRadius,
+        outRadius:35,
+        outColor:"#ccc",
+        innRadius:30,
+        innColor: "red",
+        outOpacity:.5,
+        innOpacity:.8,
+        text:"JQ"
+    });
+    JQ.addToGroupOrLayer(niGroup);
+
+    var trunangle=90;
+    var animation=new Konva.Animation(function (frame) {
+        shunGroup.rotate(trunangle*frame.timeDiff/1000);
+        shunGroup.getChildren().each(function( v, i){
+            v.rotate( -trunangle * frame.timeDiff / 1000);
+        });
+        niGroup.rotate(-trunangle*frame.timeDiff/1000);
+        niGroup.getChildren().each(function( v, i){
+            v.rotate( trunangle * frame.timeDiff / 1000);
+        });
+    },layer);
+    layer.on("mouseover", function () {
+        trunangle=30;
+    });
+    layer.on("mouseout", function () {
+        trunangle=90;
+    });
+    animation.start();
+    layer.add(bgGroup);
+    layer.add(shunGroup);
+    layer.add(niGroup);
+    stage.add(layer);
+</script>
+</body>
+</html>
